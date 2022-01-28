@@ -1,15 +1,26 @@
-// "socket.io": "^2.3.0"
-// const io = require('socket.io')(5000);
-// "socket.io-client": "^2.3.0"
-
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-app.get('/', function (req, res) {
-  res.send('hello world');
+// ==============================================
+
+// middleware:
+const cors = require('cors');
+app.use(cors());
+
+// ==============================================
+
+// endpoints:
+app.get('/josh', function (req, res) {
+  console.log('[GET] /josh');
+
+  res.status(200).json({ message: 'success' });
 });
+
+// app.post('/josh')
+
+// ==============================================
 
 // the count state
 let count = 0;
@@ -28,6 +39,9 @@ io.on('connect', function (socket) {
     io.emit('counter updated', count);
   });
 });
+
+// ==============================================
+
 http.listen(5000, () => {
   console.log('go to http://localhost:5000');
 });
