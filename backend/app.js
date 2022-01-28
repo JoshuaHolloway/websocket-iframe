@@ -12,7 +12,7 @@ app.use(cors());
 // ==============================================
 
 // endpoints:
-app.get('/josh', function (req, res) {
+app.get('/', function (req, res) {
   console.log('[GET] /josh');
 
   res.status(200).json({ message: 'success' });
