@@ -1,4 +1,4 @@
-export default function Frame() {
+export default function Frame(props) {
   return (
     <div
       style={{
@@ -8,7 +8,7 @@ export default function Frame() {
       }}
     >
       <iframe
-        src='http://localhost:3000/email'
+        src={`http://localhost:3000/email${props.route}`}
         title='W3Schools Free Online Web Tutorials'
       ></iframe>
     </div>

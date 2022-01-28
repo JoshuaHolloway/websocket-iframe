@@ -28,7 +28,7 @@ export default function Email() {
 
   return (
     <>
-      EMAIL
+      <p>User 2</p>
       <button onClick={handleClick}>Counter: {appCtx.count}</button>;
     </>
   );
