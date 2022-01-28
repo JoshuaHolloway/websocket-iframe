@@ -2,14 +2,14 @@
 // const io = require('socket.io')(5000);
 // "socket.io-client": "^2.3.0"
 
-const httpServer = require('http').createServer((req, res) => {
-  // serve the index.html file
-  res.setHeader('Content-Type', 'text/html');
-  res.setHeader('Content-Length', Buffer.byteLength(content));
-  res.end(content);
-});
+const express = require('express');
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
-const io = require('socket.io')(httpServer);
+app.get('/', function (req, res) {
+  res.send('hello world');
+});
 
 // the count state
 let count = 0;
@@ -28,6 +28,6 @@ io.on('connect', function (socket) {
     io.emit('counter updated', count);
   });
 });
-httpServer.listen(5000, () => {
+http.listen(5000, () => {
   console.log('go to http://localhost:5000');
 });
