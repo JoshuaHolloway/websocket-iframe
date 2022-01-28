@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import { AppCtxProvider } from '../context/context';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <AppCtxProvider>
+      <Component {...pageProps} />
+    </AppCtxProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import io from 'socket.io-client';
 
 import Frame from '../comps/Frame';
-import styles from '../styles/Home.module.css';
+
+import AppCtx from '../context/context';
+
+// import styles from '../styles/Home.module.css';
 
 // ==============================================
 
@@ -20,7 +23,8 @@ function handleClick() {
 // ==============================================
 
 export default function Home() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
+  const appCtx = useContext(AppCtx);
 
   // after component mount...
   useEffect(() => {
@@ -32,15 +36,16 @@ export default function Home() {
       console.log('event from backend!');
 
       // set the new count on the client
-      setCount(countFromServer);
+      // setCount(countFromServer);
+      appCtx.setCount(countFromServer);
     });
   }, []);
 
   return (
     <>
-      <Frame />
-      <Frame />
-      <button onClick={handleClick}>Counter: {count}</button>;
+      <Frame handleClick={handleClick} />
+      <Frame handleClick={handleClick} />
+      <button onClick={handleClick}>Counter: {appCtx.count}</button>;
     </>
   );
 }
